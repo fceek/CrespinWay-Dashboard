@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'cwPoll/master.css' %}">
+        <script src="{% static 'jquery.js' %}" charset="utf-8"></script>
+        <script src="{% static 'bootstrap.js' %}" charset="utf-8"></script>
+    </head>
+    <body>
+    <div class="container">
+        <nav>
+            <ol class="breadcrumb my-5">
+                <li class="breadcrumb-item"><a href="#">CrespinWay Utils</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'cwPoll:index' %}">Poll</a></li>
+                <li class="breadcrumb-item active">Detail</li>
+            </ol>
+        </nav>
+
+        <div class="jumbotron">
+            <h1 class="display-4 mb-4 pl-1">{{poll.pollDescription}}</h1>
+            <p class="lead">{{poll.pollInDetail}}</p>
+            <hr class="my-4">
+            {% if error_message %}
+                <div class="alert alert-danger alert-dismissible fade show my-4" role="alert">
+                {{error_message}}
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% endif %}
+
+            <form action="{% url 'cwPoll:vote' poll.id %}" method="post">
+            {% csrf_token %}
+            {% for choice in poll.choice_set.all %}
+                <input class="ml-3" type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+                <label for="choice{{forloop.counter}}">{{choice.choiceDescription}}</label>
+                <br>
+            {% endfor %}
+            <input class="btn btn-lg btn-outline-info mt-4" type="submit" value="Vote">
+            </form>
+
+        </div>
+    </div>
+    </body>
+</html>

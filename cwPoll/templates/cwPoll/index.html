@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'cwPoll/master.css' %}">
+        <script src="{% static 'bootstrap.js' %}" charset="utf-8"></script>
+    </head>
+    <body>
+    <div class="container">
+
+    <nav>
+        <ol class="breadcrumb my-5">
+            <li class="breadcrumb-item"><a href="#">CrespinWay Utils</a></li>
+            <li class="breadcrumb-item active">Poll</li>
+        </ol>
+    </nav>
+
+    {% if recentPolls %}
+        <ul class="list-group list-group-flush">
+        {% for poll in recentPolls %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href = "{% url 'cwPoll:detail' poll.id %}">{{poll.pollDescription}}</a>
+                <span>{{poll.pollDate}}</span>
+                {% if poll.isRecent %}
+                <span class="badge badge-pill badge-danger">New!</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No ongoing polls</p>
+    {% endif %}
+    </div>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'cwPoll/master.css' %}">
+        <script src="{% static 'bootstrap.js' %}" charset="utf-8"></script>
+    </head>
+    <body>
+    <div class="container">
+        <nav>
+            <ol class="breadcrumb my-5">
+                <li class="breadcrumb-item"><a href="#">CrespinWay Utils</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'cwPoll:index' %}">Poll</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'cwPoll:detail' poll.id %}">Detail</a></li>
+                <li class="breadcrumb-item active">Result</li>
+            </ol>
+        </nav>
+
+        <div class="jumbotron">
+            <h1 class="display-4 mb-4 pl-1">{{poll.pollDescription}}</h1>
+            <p class="lead">{{poll.pollInDetail}}</p>
+            <p>{{highestVote}}</p>
+            <hr class="my-4">
+            <ul class="list-group">
+            {% for choice in poll.choice_set.all %}
+                {% if choice.votes == highestVote %}
+                    <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-center">
+                    {{choice.choiceDescription}}
+                    <span class="badge badge-primary">{{choice.votes}} vote{{choice.votes|pluralize}}</span>
+                    </li>
+                {% else %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{choice.choiceDescription}}
+                    <span class="badge badge-info">{{choice.votes}} vote{{choice.votes|pluralize}}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </body>
+</html>
