@@ -21,7 +21,6 @@
         <div class="jumbotron">
             <h1 class="display-4 mb-4 pl-1">{{poll.pollDescription}}</h1>
             <p class="lead">{{poll.pollInDetail}}</p>
-            <p>{{highestVote}}</p>
             <hr class="my-4">
             <ul class="list-group">
             {% for choice in poll.choice_set.all %}
