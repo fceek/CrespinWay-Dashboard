@@ -24,7 +24,7 @@
             <hr class="my-4">
             {% if error_message %}
                 <div class="alert alert-danger alert-dismissible fade show my-4" role="alert">
-                {{error_message}}
+                {{error_message}}<a class="ml-4" href = "{% url 'cwPoll:result' poll.id %}">Skip to result</a>
                 <button type="button" class="close" data-dismiss="alert">
                     <span aria-hidden="true">&times;</span>
                 </button>

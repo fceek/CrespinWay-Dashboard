@@ -32,6 +32,11 @@ def result(request, poll_id):
 
 def vote(request, poll_id):
     poll = get_object_or_404(Poll, pk = poll_id)
+    if request.session.get('hasVoted', False):
+        return render(request, 'cwPoll/detail.html', {
+            'poll': poll,
+            'error_message': "You have already voted",
+        })
     try:
         selectedChoice = poll.choice_set.get(pk = request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
@@ -42,4 +47,5 @@ def vote(request, poll_id):
     else:
         selectedChoice.votes = F('votes') + 1
         selectedChoice.save()
+        request.session['hasVoted'] = True
         return HttpResponseRedirect(reverse('cwPoll:result', args=(poll.id,)))
