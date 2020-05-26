@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/master.css' %}">
+        <script src="{% static 'bootstrap.js' %}" charset="utf-8"></script>
+    </head>
+    <body>
+    <div class="container">
+
+    <nav>
+        <ol class="breadcrumb my-5">
+            <li class="breadcrumb-item active"><a href="#">CrespinWay Utils</a></li>
+        </ol>
+    </nav>
+
+    <div>
+    {{recentPolls}}<br>
+    {{allLinks}}<br>
+    {{allMembers}}<br>
+    {{thisMotd}}<br>
+    </div>
+    </div>
+    </body>
+</html>

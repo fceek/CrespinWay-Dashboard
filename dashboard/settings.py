@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'home.apps.HomeConfig',
     'cwPoll.apps.CwpollConfig',
     'django.contrib.admin',
     'django.contrib.auth',
