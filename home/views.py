@@ -24,6 +24,8 @@ def index(request):
 
 def fetchRandomMotd():
     maxId = Motd.objects.all().aggregate(maxId = Max('id'))['maxId']
+    if not maxId:
+        return None
     while True:
         chosenId = random.randint(1,maxId)
         thisMotd = Motd.objects.filter(pk = chosenId).first()
